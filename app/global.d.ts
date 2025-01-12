@@ -41,3 +41,7 @@ declare interface Window {
     };
   };
 }
+
+declare module globalThis {
+  var __USE_TIGHT_BORDER: boolean | undefined;
+}
