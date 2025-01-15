@@ -197,6 +197,11 @@ export const useAppConfig = createPersistStore(
     name: StoreKey.Config,
     version: 4.1,
 
+    partialize(state) {
+      const { tightBorder, ...rest } = state;
+      return { tightBorder: false, ...rest };
+    },
+
     merge(persistedState, currentState) {
       const state = persistedState as ChatConfig | undefined;
       if (!state) return { ...currentState };
@@ -208,7 +213,8 @@ export const useAppConfig = createPersistStore(
         if (idx !== -1) models[idx] = pModel;
         else models.push(pModel);
       });
-      return { ...currentState, ...state, models: models };
+      const tightBorder = globalThis.__USE_TIGHT_BORDER ?? false;
+      return { ...currentState, ...state, models: models, tightBorder };
     },
 
     migrate(persistedState, version) {

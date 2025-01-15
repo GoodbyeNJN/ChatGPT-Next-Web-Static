@@ -33,7 +33,10 @@ export type GetStoreState<T> = T extends { getState: () => infer U }
 const LocalStateSetters = {
   [StoreKey.Chat]: useChatStore.setState,
   [StoreKey.Access]: useAccessStore.setState,
-  [StoreKey.Config]: useAppConfig.setState,
+  [StoreKey.Config]: ((state: AppState[StoreKey.Config]) => {
+    const { tightBorder, ...rest } = state;
+    useAppConfig.setState({ tightBorder: false, ...rest });
+  }) as typeof useAppConfig.setState,
   [StoreKey.Mask]: useMaskStore.setState,
   [StoreKey.Prompt]: usePromptStore.setState,
 } as const;
@@ -41,7 +44,11 @@ const LocalStateSetters = {
 const LocalStateGetters = {
   [StoreKey.Chat]: () => getNonFunctionFileds(useChatStore.getState()),
   [StoreKey.Access]: () => getNonFunctionFileds(useAccessStore.getState()),
-  [StoreKey.Config]: () => getNonFunctionFileds(useAppConfig.getState()),
+  [StoreKey.Config]: () => {
+    const state = useAppConfig.getState();
+    state.tightBorder = globalThis.__USE_TIGHT_BORDER ?? false;
+    return getNonFunctionFileds(state);
+  },
   [StoreKey.Mask]: () => getNonFunctionFileds(useMaskStore.getState()),
   [StoreKey.Prompt]: () => getNonFunctionFileds(usePromptStore.getState()),
 } as const;
