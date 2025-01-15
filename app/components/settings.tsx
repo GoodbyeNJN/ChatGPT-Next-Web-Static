@@ -353,6 +353,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
                 syncStore.update(
                   (config) =>
                     (config.provider = e.target.value as ProviderType),
+                  false,
                 );
               }}
             >
@@ -374,6 +375,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
               onChange={(e) => {
                 syncStore.update(
                   (config) => (config.useProxy = e.currentTarget.checked),
+                  false,
                 );
               }}
             ></input>
@@ -389,6 +391,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
                 onChange={(e) => {
                   syncStore.update(
                     (config) => (config.proxyUrl = e.currentTarget.value),
+                    false,
                   );
                 }}
               ></input>
@@ -407,6 +410,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
                     syncStore.update(
                       (config) =>
                         (config.webdav.endpoint = e.currentTarget.value),
+                      false,
                     );
                   }}
                 ></input>
@@ -420,6 +424,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
                     syncStore.update(
                       (config) =>
                         (config.webdav.username = e.currentTarget.value),
+                      false,
                     );
                   }}
                 ></input>
@@ -431,6 +436,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
                     syncStore.update(
                       (config) =>
                         (config.webdav.password = e.currentTarget.value),
+                      false,
                     );
                   }}
                 ></PasswordInput>
@@ -449,6 +455,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
                   syncStore.update(
                     (config) =>
                       (config.upstash.endpoint = e.currentTarget.value),
+                    false,
                   );
                 }}
               ></input>
@@ -463,6 +470,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
                   syncStore.update(
                     (config) =>
                       (config.upstash.username = e.currentTarget.value),
+                    false,
                   );
                 }}
               ></input>
@@ -473,6 +481,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
                 onChange={(e) => {
                   syncStore.update(
                     (config) => (config.upstash.apiKey = e.currentTarget.value),
+                    false,
                   );
                 }}
               ></PasswordInput>

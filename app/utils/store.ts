@@ -58,13 +58,13 @@ export function createPersistStore<T extends object, M>(
                 T & M & MakeUpdater<T>
               >);
             },
-            update(updater) {
+            update(updater, mark = true) {
               const state = deepClone(get());
               updater(state);
-              set({
-                ...state,
-                lastUpdateTime: Date.now(),
-              });
+              if (mark) {
+                state.lastUpdateTime = Date.now();
+              }
+              set(state);
             },
             setHasHydrated: (state: boolean) => {
               set({ _hasHydrated: state } as Partial<T & M & MakeUpdater<T>>);

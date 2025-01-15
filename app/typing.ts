@@ -1,4 +1,4 @@
-export type Updater<T> = (updater: (value: T) => void) => void;
+export type Updater<T> = (updater: (value: T) => void, mark?: boolean) => void;
 
 export const ROLES = ["system", "user", "assistant"] as const;
 export type MessageRole = (typeof ROLES)[number];
