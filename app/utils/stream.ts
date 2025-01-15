@@ -20,6 +20,9 @@ type StreamResponse = {
 };
 
 export function fetch(url: string, options?: RequestInit): Promise<Response> {
+  if (window.__USE_BROWSER_FETCH) {
+    return window.fetch(url, options);
+  }
   if (window.__TAURI__) {
     const {
       signal,

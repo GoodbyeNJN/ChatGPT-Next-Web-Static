@@ -256,9 +256,7 @@ export function getMessageImages(message: RequestMessage): string[] {
 
 export function isVisionModel(model: string) {
   const visionModels = useAccessStore.getState().visionModels;
-  const envVisionModels = visionModels
-    ?.split(",")
-    .map((m) => m.trim());
+  const envVisionModels = visionModels?.split(",").map((m) => m.trim());
   if (envVisionModels?.includes(model)) {
     return true;
   }
@@ -316,6 +314,9 @@ export function fetch(
   url: string,
   options?: Record<string, unknown>,
 ): Promise<any> {
+  if (window.__USE_BROWSER_FETCH) {
+    return window.fetch(url, options);
+  }
   if (window.__TAURI__) {
     return tauriStreamFetch(url, options);
   }

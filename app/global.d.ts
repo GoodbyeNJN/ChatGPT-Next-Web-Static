@@ -44,4 +44,5 @@ declare interface Window {
 
 declare module globalThis {
   var __USE_TIGHT_BORDER: boolean | undefined;
+  var __USE_BROWSER_FETCH: boolean | undefined;
 }
